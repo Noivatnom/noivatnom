@@ -9,6 +9,18 @@
 ====================================================== -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NOIVATNOM is a creative management company. We represent artists across every discipline, produce the work, and run the business around it — deals, production, placement, and distribution.">
+<link rel="canonical" href="https://noivatnom.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%23111013%22/%3E%3Crect%20x%3D%224%22%20y%3D%227%22%20width%3D%223.6%22%20height%3D%2218%22%20fill%3D%22%23FF3D1F%22/%3E%3Crect%20x%3D%229.4%22%20y%3D%227%22%20width%3D%223.6%22%20height%3D%2218%22%20fill%3D%22%23FF8A00%22/%3E%3Crect%20x%3D%2214.8%22%20y%3D%227%22%20width%3D%223.6%22%20height%3D%2218%22%20fill%3D%22%23B7E51C%22/%3E%3Crect%20x%3D%2220.2%22%20y%3D%227%22%20width%3D%223.6%22%20height%3D%2218%22%20fill%3D%22%231F3DFF%22/%3E%3Crect%20x%3D%2225.6%22%20y%3D%227%22%20width%3D%222.4%22%20height%3D%2218%22%20fill%3D%22%23E81E8C%22/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NOIVATNOM">
+<meta property="og:title" content="NOIVATNOM — A house of creatives">
+<meta property="og:description" content="NOIVATNOM is a creative management company. We represent artists across every discipline, produce the work, and run the business around it — deals, production, placement, and distribution.">
+<meta property="og:url" content="https://noivatnom.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NOIVATNOM — A house of creatives">
+<meta name="twitter:description" content="NOIVATNOM is a creative management company. We represent artists across every discipline, produce the work, and run the business around it — deals, production, placement, and distribution.">
+<meta name="theme-color" content="#FCFBF8">
 <title>NOIVATNOM — A house of creatives</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -226,6 +238,185 @@
     .nav-links{display:none}
   }
 </style>
+
+<!-- ==========================================================================
+     NOIVATNOM — ANALYTICS  (added 2026-07-25)
+     Two IDs must be filled in below before this does anything:
+       the GA4 Measurement ID  (2 spots, in the Google Analytics block)
+       the Clarity Project ID  (1 spot, in the Microsoft Clarity block)
+     ========================================================================== -->
+
+<!-- ---------- Google Analytics 4 ---------- -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9TZP4D2MGY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  // send_page_view:false — this site is a hash router (#/artists/simone).
+  // GA4 does not reliably auto-track hash changes, so page views are fired
+  // manually below. Leaving this true would under-count or double-count.
+  gtag('config', 'G-9TZP4D2MGY', { send_page_view: false });
+</script>
+
+<!-- ---------- Microsoft Clarity ---------- -->
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "xs2c8hkdnr");
+</script>
+
+<!-- ---------- NOIVATNOM custom tracking ---------- -->
+<script>
+(function () {
+  'use strict';
+
+  /* 1. ROUTE MAP — add a line here whenever you add a new page/artist. */
+  var ROUTES = {
+    '/':                    'Home',
+    '/portfolio':           'Portfolio',
+    '/artists':             'The Creatives',
+    '/artists/simone':      'Artist: Simone',
+    '/artists/agyemnan':    'Artist: Agyemnan',
+    '/about':               'About',
+    '/work':                'Work With Us',
+    '/contact':             'Contact'
+  };
+
+  function currentRoute() {
+    var h = location.hash.replace(/^#/, '');
+    if (!h || h === '/') return '/';
+    return h.replace(/\/+$/, '') || '/';
+  }
+
+  function routeTitle(route) {
+    if (ROUTES[route]) return ROUTES[route];
+    var m = route.match(/^\/artists\/(.+)$/);
+    if (m) return 'Artist: ' + m[1].charAt(0).toUpperCase() + m[1].slice(1);
+    return route;
+  }
+
+  /* 2. PAGE VIEWS — on load and on every hash change. */
+  var lastRoute = null;
+
+  function sendPageView() {
+    var route = currentRoute();
+    if (route === lastRoute) return;
+    lastRoute = route;
+    var title = routeTitle(route);
+
+    gtag('event', 'page_view', {
+      page_title:    'NOIVATNOM — ' + title,
+      page_location: location.origin + location.pathname + '#' + route,
+      page_path:     '/#' + route,
+      route_name:    title
+    });
+
+    if (window.clarity) { clarity('set', 'route', title); }
+    resetScrollTracking();
+  }
+  window.addEventListener('hashchange', sendPageView);
+
+  /* 3. ARTIST PROFILE VIEWS — rank creatives by attention. */
+  function trackArtistView() {
+    var m = currentRoute().match(/^\/artists\/(.+)$/);
+    if (!m) return;
+    gtag('event', 'view_artist_profile', { artist_name: m[1] });
+  }
+  window.addEventListener('hashchange', trackArtistView);
+
+  /* 4. CONVERSIONS — every mailto: CTA is an application or inquiry. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a || !a.href) return;
+
+    var href = a.getAttribute('href') || '';
+    var text = (a.textContent || '').trim().slice(0, 80);
+
+    if (href.indexOf('mailto:') === 0) {
+      var subject = '';
+      var q = href.split('?')[1];
+      if (q) {
+        var sm = q.match(/subject=([^&]*)/);
+        if (sm) { try { subject = decodeURIComponent(sm[1].replace(/\+/g, ' ')); } catch (err) { subject = sm[1]; } }
+      }
+      gtag('event', 'generate_lead', {
+        cta_text:     text,
+        lead_type:    subject || text,
+        source_route: routeTitle(currentRoute())
+      });
+      if (window.clarity) clarity('event', 'lead_' + (subject || text).slice(0, 40));
+      return;
+    }
+
+    if (/instagram\.com|tiktok\.com|youtube\.com/i.test(href)) {
+      gtag('event', 'social_click', {
+        network:      /instagram/i.test(href) ? 'instagram'
+                    : /tiktok/i.test(href)    ? 'tiktok' : 'youtube',
+        link_url:     href,
+        cta_text:     text,
+        source_route: routeTitle(currentRoute())
+      });
+      return;
+    }
+
+    if (a.hostname && a.hostname !== location.hostname && /^https?:/.test(href)) {
+      gtag('event', 'outbound_click', {
+        link_url:     href,
+        link_domain:  a.hostname,
+        cta_text:     text,
+        source_route: routeTitle(currentRoute())
+      });
+    }
+  }, true);
+
+  /* 5. SCROLL DEPTH — per route: 25 / 50 / 75 / 90%. */
+  var MILESTONES = [25, 50, 75, 90];
+  var hit = {};
+  var ticking = false;
+
+  function resetScrollTracking() { hit = {}; }
+
+  function checkScroll() {
+    var doc      = document.documentElement;
+    var body     = document.body;
+    var scrollY  = window.pageYOffset || doc.scrollTop || 0;
+    var height   = Math.max(doc.scrollHeight, body ? body.scrollHeight : 0);
+    var viewport = window.innerHeight || doc.clientHeight;
+    var scrollable = height - viewport;
+    if (scrollable <= 0) return;
+
+    var pct = Math.round((scrollY / scrollable) * 100);
+    for (var i = 0; i < MILESTONES.length; i++) {
+      var m = MILESTONES[i];
+      if (pct >= m && !hit[m]) {
+        hit[m] = true;
+        gtag('event', 'scroll_depth', {
+          percent_scrolled: m,
+          route_name:       routeTitle(currentRoute())
+        });
+      }
+    }
+  }
+
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () { checkScroll(); ticking = false; });
+  }, { passive: true });
+
+  /* 6. BOOT */
+  function boot() { sendPageView(); trackArtistView(); checkScroll(); }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else { boot(); }
+})();
+</script>
+<!-- ---------- end NOIVATNOM analytics ---------- -->
+
 </head>
 <body>
 
