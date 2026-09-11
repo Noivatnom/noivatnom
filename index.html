@@ -72,6 +72,54 @@
   .hero .intro{max-width:560px;margin-top:38px;font-size:clamp(1rem,1.5vw,1.15rem);line-height:1.8;color:var(--grey)}
   .hero .intro b{color:var(--ink);font-weight:600}
   .hero .actions{margin-top:42px;display:flex;gap:14px;flex-wrap:wrap}
+
+  /* ---- newsletter ---- */
+  .news{position:relative;overflow:hidden;background:var(--ink);color:var(--white);
+        border-radius:28px;padding:clamp(44px,6vw,84px) clamp(26px,5vw,72px);margin-top:12px}
+  .news::before{content:'';position:absolute;inset:0;opacity:.5;pointer-events:none;
+        background:radial-gradient(620px 320px at 12% -10%,rgba(232,30,140,.55),transparent 62%),
+                   radial-gradient(560px 300px at 92% 8%,rgba(31,61,255,.5),transparent 60%),
+                   radial-gradient(520px 340px at 60% 115%,rgba(183,229,28,.32),transparent 62%)}
+  .news>*{position:relative;z-index:1}
+  .news .kicker{color:var(--chartreuse);opacity:1}
+  .news h2{font-family:'Instrument Serif',serif;font-weight:400;line-height:1.03;
+        font-size:clamp(2.3rem,5.6vw,4.1rem);margin:14px 0 18px;letter-spacing:-.01em}
+  .news h2 em{font-style:italic;color:var(--chartreuse)}
+  .news p.lede{max-width:560px;line-height:1.75;opacity:.88;font-size:clamp(.98rem,1.3vw,1.08rem)}
+  .news-form{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px;max-width:560px}
+  .news-form input{flex:1 1 260px;min-width:0;background:rgba(255,255,255,.07);color:var(--white);
+        border:1.5px solid rgba(255,255,255,.28);border-radius:999px;padding:16px 24px;
+        font:inherit;font-size:.95rem;outline:none;transition:border-color .2s,background .2s}
+  .news-form input::placeholder{color:rgba(255,255,255,.45)}
+  .news-form input:focus{border-color:var(--chartreuse);background:rgba(255,255,255,.12)}
+  .news-form button{background:var(--white);color:var(--ink);border:1.5px solid var(--white);
+        border-radius:999px;padding:16px 34px;font:inherit;font-weight:700;font-size:.92rem;
+        cursor:pointer;transition:transform .15s,background .2s}
+  .news-form button:hover{transform:translateY(-2px);background:var(--chartreuse);border-color:var(--chartreuse)}
+  .news-note{margin-top:16px;font-size:.78rem;opacity:.6;letter-spacing:.01em}
+  .news-ok{display:none;margin-top:26px;font-size:1.02rem;font-weight:600;color:var(--chartreuse)}
+  .news-get{display:flex;gap:26px;flex-wrap:wrap;margin-top:42px;padding-top:30px;
+        border-top:1px solid rgba(255,255,255,.16)}
+  .news-get div{flex:1 1 168px}
+  .news-get b{display:block;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
+        color:var(--chartreuse);margin-bottom:7px}
+  .news-get span{font-size:.9rem;line-height:1.6;opacity:.82}
+
+  /* ---- video ---- */
+  .vid-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px;margin-top:34px}
+  .vid{position:relative;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+        background:var(--white);transition:transform .18s,box-shadow .18s;text-decoration:none;color:inherit;display:block}
+  .vid:hover{transform:translateY(-4px);box-shadow:0 14px 38px rgba(17,16,19,.1)}
+  .vid .thumb{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+        background:var(--accent,var(--ink));position:relative}
+  .vid .thumb::after{content:'';width:0;height:0;border-left:22px solid rgba(255,255,255,.95);
+        border-top:14px solid transparent;border-bottom:14px solid transparent;margin-left:6px}
+  .vid .body{padding:20px 22px 24px}
+  .vid .tag{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--grey)}
+  .vid h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:1.5rem;margin:9px 0 8px;line-height:1.15}
+  .vid p{font-size:.9rem;line-height:1.65;color:var(--grey)}
+  .vid .soon{position:absolute;top:14px;right:14px;background:rgba(252,251,248,.94);color:var(--ink);
+        font-size:.64rem;font-weight:800;letter-spacing:.16em;padding:6px 12px;border-radius:999px;z-index:2}
   .btn{display:inline-block;padding:15px 30px;border-radius:999px;text-decoration:none;font-weight:600;font-size:.92rem;background:var(--ink);color:var(--white);border:1.5px solid var(--ink);transition:transform .15s;cursor:pointer}
   .btn:hover{transform:translateY(-2px)}
   .btn.line{background:transparent;color:var(--ink)}
@@ -279,9 +327,9 @@
     '/portfolio':           'Portfolio',
     '/artists':             'The Creatives',
     '/artists/simone':      'Artist: Simone',
-    '/artists/agyemnan':    'Artist: Agyemnan',
     '/about':               'About',
     '/work':                'Work With Us',
+    '/newsletter':          'Newsletter',
     '/contact':             'Contact'
   };
 
@@ -432,6 +480,7 @@
     <li><a href="#/artists" data-nav="artists">The Creatives</a></li>
     <li><a href="#/about" data-nav="about">About</a></li>
     <li><a href="#/work" data-nav="work">Work with us</a></li>
+    <li><a href="#/newsletter" data-nav="newsletter">Newsletter</a></li>
   </ul>
   <a class="nav-cta" href="#/contact">Contact</a>
 </nav>
@@ -480,12 +529,6 @@
             <p>A licensed cosmetologist and Aveda Institute&ndash;trained nail artist running an established studio with a devoted clientele. Every set is designed as an invitation — into her perspective, her humor, her eye.</p>
             <a class="view" href="#/artists/simone">View profile</a>
           </article>
-          <article class="sp-slide">
-            <span class="disc">Poetry · Painting · Music · Fashion — DMV</span>
-            <h3>Agyemnan</h3>
-            <p>A multidisciplinary artist who channels his creative vision through poetry, painting, music, fashion and more — moving fluently between mediums, with Ghanaian roots running through everything he makes.</p>
-            <a class="view" href="#/artists/agyemnan">View profile</a>
-          </article>
         </div>
       </div>
       <div class="sp-controls">
@@ -510,6 +553,60 @@
     </article>
   </div>
 
+
+  <section id="videos">
+    <span class="kicker">Watch</span>
+    <h2>The work, while it&rsquo;s being made.</h2>
+    <p class="measure">We film the build. Not the polished after &mdash; the room, the bench, the arguing over a seam. Every series here is produced in-house and every contributor is named on it.</p>
+    <div class="vid-grid">
+      <a class="vid" href="#/contact">
+        <div class="thumb" style="--accent:var(--tangerine)"><span class="soon">First cut soon</span></div>
+        <div class="body">
+          <span class="tag">Documentary Series</span>
+          <h3>Field Notes</h3>
+          <p>Portraits of working lives &mdash; the jeweler&rsquo;s bench, the perfumer&rsquo;s organ, the chef&rsquo;s line, the athlete&rsquo;s off-season &mdash; and what each life asks of a person.</p>
+        </div>
+      </a>
+      <a class="vid" href="https://instagram.com/noivatnom" target="_blank" rel="noopener">
+        <div class="thumb" style="--accent:var(--chartreuse)"></div>
+        <div class="body">
+          <span class="tag">Always Rolling</span>
+          <h3>The Draft Series</h3>
+          <p>The running record of the house assembling itself &mdash; every casting call, weekend sprint, and drop, captured live.</p>
+        </div>
+      </a>
+      <a class="vid" href="#/artists/simone">
+        <div class="thumb" style="--accent:var(--cobalt)"><span class="soon">In production</span></div>
+        <div class="body">
+          <span class="tag">Venture Build</span>
+          <h3>Nailtopia, From Zero</h3>
+          <p>One licensed artist, one business, built properly &mdash; identity, booking, storefront and operations, documented end to end.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="news">
+      <span class="kicker">The list</span>
+      <h2>Get the drop <em>before</em> it&rsquo;s a drop.</h2>
+      <p class="lede">One letter a month from inside the house. New creatives before they&rsquo;re on the site, limited runs while sizes still exist, open seats and paid briefs before they&rsquo;re posted anywhere else, and the numbers behind how a small creative business actually gets built.</p>
+
+      <form class="news-form" id="newsForm" novalidate>
+        <input type="email" id="newsEmail" name="email" placeholder="you@email.com" aria-label="Email address" required>
+        <button type="submit">Join the house</button>
+      </form>
+      <div class="news-ok" id="newsOk">You&rsquo;re in. Watch your inbox &mdash; first letter lands at the end of the month.</div>
+      <p class="news-note">No more than once a month. Unsubscribe in one click. We never sell or share your address.</p>
+
+      <div class="news-get">
+        <div><b>First look</b><span>Limited runs announced to the list days before anyone else sees them.</span></div>
+        <div><b>Open seats</b><span>Paid briefs and roster openings, sent here before they&rsquo;re public.</span></div>
+        <div><b>The receipts</b><span>What we made, what it cost, what worked &mdash; written plainly.</span></div>
+      </div>
+    </div>
+  </section>
+
   <section class="manifesto">
     <div class="col reveal">
       <h2>Who we are</h2>
@@ -521,6 +618,35 @@
       <p>We manage careers and produce work: assembling small teams around a sharp brief, funding what needs funding, and shipping on schedule. Beyond the gallery, we bring that same label treatment to any practice worth amplifying — a chef, a jeweler, a perfumer, an athlete, a neighborhood shop with a devoted block — building the identity, the content, and the audience around it.</p>
       <p>We also find the work. Placing our creatives with the businesses that need them across New York and smaller cities, and connecting them to galleries and collectors, is our responsibility, not theirs. And we teach the business itself — forming an entity, reading a contract, pricing the work, managing money — because the goal is to raise owners, not dependents.</p>
     </div>
+  </section>
+</main>
+
+<!-- ============ PAGE: NEWSLETTER ============ -->
+<main data-page="newsletter">
+  <section>
+    <div class="news">
+      <span class="kicker">The list</span>
+      <h2>Get the drop <em>before</em> it&rsquo;s a drop.</h2>
+      <p class="lede">One letter a month from inside the house. New creatives before they&rsquo;re on the site, limited runs while sizes still exist, open seats and paid briefs before they&rsquo;re posted anywhere else, and the numbers behind how a small creative business actually gets built.</p>
+
+      <form class="news-form" id="newsForm" novalidate>
+        <input type="email" id="newsEmail" name="email" placeholder="you@email.com" aria-label="Email address" required>
+        <button type="submit">Join the house</button>
+      </form>
+      <div class="news-ok" id="newsOk">You&rsquo;re in. Watch your inbox &mdash; first letter lands at the end of the month.</div>
+      <p class="news-note">No more than once a month. Unsubscribe in one click. We never sell or share your address.</p>
+
+      <div class="news-get">
+        <div><b>First look</b><span>Limited runs announced to the list days before anyone else sees them.</span></div>
+        <div><b>Open seats</b><span>Paid briefs and roster openings, sent here before they&rsquo;re public.</span></div>
+        <div><b>The receipts</b><span>What we made, what it cost, what worked &mdash; written plainly.</span></div>
+      </div>
+    </div>
+  </section>
+  <section style="border-top:1px solid var(--line)">
+    <span class="kicker">Why bother</span>
+    <h2>We write it like a letter, not a campaign.</h2>
+    <p class="measure">Most brand newsletters exist to sell you something twice a week. This one exists because the house is being built in public and the building is the interesting part. If a month goes by with nothing worth saying, we don&rsquo;t send one.</p>
   </section>
 </main>
 
@@ -544,13 +670,6 @@
         <span class="meta">Beauty · Brand Build · Operations</span>
         <p>A full venture build for a licensed nail artist: identity, booking, content, and operations — the house&rsquo;s first live business.</p>
         <a href="#/artists/simone">View the artist</a>
-      </article>
-      <article class="folio-item" style="--accent:var(--magenta)">
-        <span class="status">Live</span>
-        <h3>Agyemnan</h3>
-        <span class="meta">Artist Development · Multidisciplinary</span>
-        <p>Career development for a multidisciplinary artist working across poetry, painting, music, and fashion — production, campaign, and reach.</p>
-        <a href="#/artists/agyemnan">View the artist</a>
       </article>
       <article class="folio-item" style="--accent:var(--tangerine)">
         <span class="status">In production</span>
@@ -605,13 +724,8 @@
       <button class="chip" data-cat="lifestyle">Lifestyle &amp; Travel</button>
     </div>
     <h3 class="cat-title" id="catTitle">Showing all disciplines</h3>
+    <p id="rosterEmpty" class="measure" style="display:none;opacity:.7;margin-bottom:28px">We are not representing anyone in this discipline yet. <a href="#/work" style="color:inherit">Apply to join the roster</a>.</p>
     <div class="roster" id="roster">
-      <div class="card" data-cats="fine-arts music word film fashion" style="--accent:var(--magenta)">
-        <span class="cats">Poetry · Painting · Music · Fashion</span>
-        <h3>Agyemnan</h3>
-        <p>Multidisciplinary artist — poetry, painting, music, fashion and more. Raised in the DMV, Ghanaian roots in every thread.</p>
-        <a href="#/artists/agyemnan">View profile</a>
-      </div>
       <div class="card" data-cats="beauty" style="--accent:var(--cobalt)">
         <span class="cats">Beauty &amp; Nail Artistry</span>
         <h3>Simone</h3>
@@ -702,27 +816,6 @@
   </section>
 </main>
 
-<!-- ============ PAGE: ARTIST — AGYEMNAN ============ -->
-<main data-page="artist-agyemnan">
-  <section class="profile-hero">
-    <a class="backlink" href="#/artists">&#8592; Back to the creatives</a>
-    <div class="profile-grid">
-      <div>
-        <img src="img/agyemnan.jpg" alt="Agyemnan — portrait">
-        <div class="cap">Agyemnan — Multidisciplinary Artist<span class="credit">Portrait by <a href="https://instagram.com/sebastianrodaaa" target="_blank" rel="noopener">@sebastianrodaaa</a></span></div>
-      </div>
-      <div>
-        <span class="disc">Poetry · Painting · Music · Fashion</span>
-        <h1>Agyemnan</h1>
-        <p class="measure">A multidisciplinary artist who channels his creative vision through <b>poetry, painting, music, fashion and more</b>. Raised in the DMV with Ghanaian roots running through everything he makes, Agyemnan moves fluently between mediums — a canvas becomes a verse becomes a record becomes a garment — and the through-line never changes: one story, told with <b>authenticity and love</b>.</p>
-        <div class="actions" style="margin-top:34px;display:flex;gap:14px;flex-wrap:wrap">
-          <a class="btn" href="mailto:greetings@noivatnom.com?subject=Agyemnan%20—%20inquiry">Commission / book</a>
-          <a class="btn line" href="https://instagram.com/noivatnom" target="_blank" rel="noopener">Follow the work</a>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
 
 <!-- ============ PAGE: ARTIST — SIMONE ============ -->
 <main data-page="artist-simone">
@@ -832,12 +925,12 @@
     '': 'home', '/': 'home',
     '/artists': 'artists',
     '/creatives': 'artists',
-    '/artists/agyemnan': 'artist-agyemnan',
     '/artists/simone': 'artist-simone',
     '/portfolio': 'portfolio',
     '/about': 'about',
     '/founder': 'about',
     '/work': 'work',
+    '/newsletter': 'newsletter',
     '/contact': 'contact'
   };
   function show(path){
@@ -896,10 +989,15 @@
       var cat = chip.getAttribute('data-cat');
       var t = document.getElementById('catTitle');
       t.textContent = (cat === 'all') ? 'Showing all disciplines' : 'Showing ' + chip.textContent;
+      var shown = 0;
       document.querySelectorAll('#roster .card').forEach(function(card){
         var cats = card.getAttribute('data-cats') || '';
-        card.classList.toggle('hide', cat !== 'all' && cats.indexOf(cat) === -1);
+        var hide = cat !== 'all' && cats.indexOf(cat) === -1;
+        card.classList.toggle('hide', hide);
+        if(!hide) shown++;
       });
+      var empty = document.getElementById('rosterEmpty');
+      if(empty) empty.style.display = shown ? 'none' : 'block';
     });
   });
 
@@ -917,6 +1015,13 @@
       { hue:'#B7E51C', on:'#151A05' }
     ];
     var i = 0;
+    var ctrls = section.querySelector('.sp-controls');
+    if(slides.length < 2 && ctrls){
+      var pv = ctrls.querySelector('#spPrev'), nx = ctrls.querySelector('#spNext');
+      if(pv) pv.style.display = 'none';
+      if(nx) nx.style.display = 'none';
+      if(dotsWrap) dotsWrap.style.display = 'none';
+    }
     for(var d=0; d<slides.length; d++){
       var b = document.createElement('button');
       b.className = 'sp-dot' + (d===0 ? ' on' : '');
@@ -937,6 +1042,26 @@
     document.getElementById('spPrev').addEventListener('click', function(){ go(i-1); });
     go(0);
   })();
+
+  /* ---------- newsletter ---------- */
+  document.querySelectorAll('#newsForm').forEach(function(f){
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      var input = f.querySelector('input[type=email]');
+      var val = (input.value || '').trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val)){
+        input.style.borderColor = '#FF3D1F'; input.focus(); return;
+      }
+      input.style.borderColor = '';
+      if(window.gtag){ gtag('event','newsletter_signup',{method:'site_form'}); }
+      var ok = f.parentNode.querySelector('.news-ok');
+      f.style.display = 'none';
+      if(ok) ok.style.display = 'block';
+      window.location.href = 'mailto:greetings@noivatnom.com'
+        + '?subject=' + encodeURIComponent('Newsletter signup')
+        + '&body=' + encodeURIComponent('Please add me to the NOIVATNOM list: ' + val);
+    });
+  });
 
   route();
 </script>
